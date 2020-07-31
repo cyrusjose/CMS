@@ -28,38 +28,102 @@ function start() {
     })
     .then(function(answer){
         switch(answer.prelimQuestion){
-            case answer.choices === questions[0]:
+            // Case does not evaluate anything.
+            case questions[0]:
                 addDepartment();
-                start();
                 break;
-            case answer.choices === questions[1]:
+            case questions[1]:
                 addEmployee();
-                start();
                 break;
-            case answer.choices === questions[2]:
+            case questions[2]:
                 addRole();
-                start();
                 break;
-            case answer.choices === questions[3]:
-                viewEmmployee();
-                start();
+            case questions[3]:
+                viewEmployee();
                 break;
-            case answer.choices === questions[4]:
+            case questions[4]:
                 viewDepartment();
-                start();
                 break;
-            case answer.choices === questions[5]:
+            case questions[5]:
                 viewRole();
-                start();
                 break;
-            case answer.choices === questions[6]:
+            case questions[6]:
                 upadateEmployeeRole();
-                start();
                 break;
             default:
                 'Please choose and option';
-                start();
-                break
+                break;
         };
     });
 }
+let depArr = [];
+let addDepartment = ()=>{
+    inquirer
+    .prompt ([
+        {
+            name: 'addDepartment',
+            type: 'input',
+            message: 'What\'s the name of the department'
+        }
+    ]).then(answer => {
+        connection.query(
+            'INSERT INTO department SET ?', 
+            {
+                name: answer.addDepartment
+            },
+            (err)=>{
+                if (err) throw err;
+                console.log('You\'ve successfully added a department')
+                start();
+            },
+            depArr.push(answer.addDepartment)
+        )
+    });
+};
+
+let addRole = () => {
+    
+};
+
+let addEmployee = () =>{
+    inquirer
+    .prompt([
+        {
+            name: 'empTitle',
+            type: 'input',
+            message: 'What is the title of the employee'
+        },
+        {
+            name: 'empSalary',
+            type: 'input',
+            message: 'What is the salary'
+        },
+        // {Add to staff role}
+            name: 'departments',
+            type: 'list',
+            message: 'Choose a department',
+            choices: depArr
+        }
+    ]).then(answer => {
+        connection.query(
+            'SELECT * FROM cms_db',
+            {
+
+            }
+        )
+    })
+};
+
+let viewDepartment = () =>{
+
+};
+let viewEmployee = () =>{
+
+}
+let viewRole = () => {
+
+};
+
+let upadateEmployeeRole = () =>{
+
+};
