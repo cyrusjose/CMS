@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "allows users to add, view, update employees, roles, and departments",
   "main": "server.js",
+  "start": "node server.js",
   "dependencies": {
     "express": "^4.17.1",
     "inquirer": "^6.5.2",
