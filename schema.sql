@@ -20,7 +20,7 @@ CREATE TABLE staffRole (
     title VARCHAR(40) NOT NULL,
     salary DECIMAL(6, 0) NOT NULL,
     department_id INT NOT NULL,
-    PRIMARY KEY(id),
+    PRIMARY KEY(id)
 );
 
 -- Create table for employee
@@ -29,6 +29,7 @@ CREATE TABLE employee (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
-    manager_id INT NOT NULL
+    manager_id INT NOT NULL,
+    PRIMARY KEY(id)
 );
 
