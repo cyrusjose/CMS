@@ -10,6 +10,7 @@ const questions = [
   "View a department",
   "View a role",
   "Update employee role",
+  'Exit'
 ];
 
 function start() {
@@ -44,6 +45,9 @@ function start() {
         case questions[6]:
           upadateEmployeeRole();
           break;
+        // case questions[7]:
+        //     return;
+        //   break;
         default:
           "Please choose and option";
           break;
@@ -52,6 +56,7 @@ function start() {
 }
 
 let addDepartment = () => {
+  let addDeptQuery = "INSERT INTO department SET ?";
   inquirer
     .prompt([
       {
@@ -62,7 +67,7 @@ let addDepartment = () => {
     ])
     .then((answer) => {
       connection.query(
-        "INSERT INTO department SET ?",
+        addDeptQuery,
         {
           name: answer.addDepartment,
         },
@@ -76,32 +81,64 @@ let addDepartment = () => {
 };
 
 let addRole = () => {
-    connect
-};
-
-let addEmployee = () => {
+  let addRoleQuery = "INSERT INTO staffRole SET ?";
   inquirer
     .prompt([
       {
-        name: "empTitle",
+        name: "title",
         type: "input",
-        message: "What is the title of the employee",
+        message: "Please enter the title of the role",
       },
       {
-        name: "empSalary",
+        name: "salary",
         type: "input",
-        message: "What is the salary",
-      },
-      // {Add to staff role}
-      {
-        name: "departments",
-        type: "list",
-        message: "Choose a department",
-        choices: depArr,
+        message: "Please enter the salary of the employee",
       },
     ])
     .then((answer) => {
-      connection.query("SELECT * FROM cms_db", {});
+      connection.query(
+        addRoleQuery,
+        {
+          title: answer.title,
+          salary: answer.salary,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("You have successfully added a role!");
+          start();
+        }
+      );
+    });
+};
+
+let addEmployee = () => {
+  let addEmpQuery = "INSERT INTO employee SET ?";
+  inquirer
+    .prompt([
+      {
+        name: "firstName",
+        type: "input",
+        message: "Please enter the first name of the employee.",
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "Please enter the last name of the employee.",
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        addEmpQuery,
+        {
+          first_name: answer.firstName,
+          last_name: answer.lastName
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("You have successfully added an employee!");
+          start();
+        }
+      );
     });
 };
 
