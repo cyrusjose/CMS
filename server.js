@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var connection = require("./config/connection");
-var consolTable = require("console.table");
+var consTable = require("console.table");
 
 // There are a total of 7 items in the array currently. Since index starts at 0 the frist item is 0 and the last item is 6.
 const questions = [
@@ -70,9 +70,10 @@ let addDepartment = () => {
         {
           name: answer.addDepartment,
         },
-        (err) => {
+        (err, res) => {
           if (err) throw err;
           console.log("You've successfully added a department");
+          consTable(res);
           start();
         }
       );
@@ -98,12 +99,13 @@ let addRole = () => {
         message: "What is the department id number?",
       },
     ])
-    .then(function (result) {
+    .then(function (answer) {
       connection.query(
         "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
         [answer.role, answer.salary, answer.deptID],
         function (err, res) {
           if (err) throw err;
+          consTable(res);
           start();
         }
       );
@@ -129,22 +131,44 @@ let addEmployee = ()=> {
         message: "What is the employee's role ID?",
       },
     ])
-    .then(function (res) {
+    .then(function (answer) {
       connection.query(
         "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
         [answer.firstname, answer.lastname, answer.roleId],
         function (err, res) {
           if (err) throw err;
           console.log("Successfully added employee!");
+          consTable(res);
           start();
         }
       );
     });
 }
 
-let viewDepartment = () => {};
-let viewEmployee = () => {};
-let viewRole = () => {};
+let viewDepartment = () => {
+  const queryString = 'SELECT * FROM department';
+  connection.query(queryString, function(err, res){
+    if(err) throw err;
+    consTable(res);
+    start();
+  })
+};
+let viewEmployee = () => {
+  const queryString = 'SELECT * FROM employee';
+  connection.query(queryString, function(err, res){
+    if (err) throw err;
+    consTable(res);
+    start();
+  })
+};
+let viewRole = () => {
+  const queryString = 'SELECT * FROM staffRole';
+  connection.query(queryString, function(err, res){
+    if (err) throw err;
+    consTable(res);
+    start();
+  })
+};
 
 let upadateEmployeeRole = () => {
   inquirer
@@ -166,6 +190,7 @@ let upadateEmployeeRole = () => {
         [answer.updateRole, answer.eeUpdate],
         function (err, res) {
           if (err) throw err;
+          consTable(res);
           start();
         }
       );
