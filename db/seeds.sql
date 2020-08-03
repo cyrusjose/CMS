@@ -13,7 +13,8 @@ VALUES ("Sales Lead", 60000 ,1),
 
 
 INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Jameela", "James", 1),
+VALUES ("Dorothy", "James", 1),
 ("Aline", "Nunes", 2),
 ("Louise", "Akemi",3),
-("Chimeny","Louise",4);
+("Chimeny","Louise",4),
+('Chamilla', 'Jones', 5);

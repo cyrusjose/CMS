@@ -73,7 +73,7 @@ let addDepartment = () => {
         (err, res) => {
           if (err) throw err;
           console.log("You've successfully added a department");
-          consTable(res);
+          console.table(res);
           start();
         }
       );
@@ -105,7 +105,7 @@ let addRole = () => {
         [answer.role, answer.salary, answer.deptID],
         function (err, res) {
           if (err) throw err;
-          consTable(res);
+          console.table(res);
           start();
         }
       );
@@ -138,7 +138,7 @@ let addEmployee = ()=> {
         function (err, res) {
           if (err) throw err;
           console.log("Successfully added employee!");
-          consTable(res);
+          console.table(res);
           start();
         }
       );
@@ -146,26 +146,26 @@ let addEmployee = ()=> {
 }
 
 let viewDepartment = () => {
-  const queryString = 'SELECT * FROM department';
+  let queryString = 'SELECT * FROM department';
   connection.query(queryString, function(err, res){
     if(err) throw err;
-    consTable(res);
+    console.table(res);
     start();
   })
 };
 let viewEmployee = () => {
-  const queryString = 'SELECT * FROM employee';
+  let queryString = 'SELECT * FROM employee';
   connection.query(queryString, function(err, res){
     if (err) throw err;
-    consTable(res);
+    console.table(res);
     start();
   })
 };
 let viewRole = () => {
-  const queryString = 'SELECT * FROM staffRole';
+  let queryString = 'SELECT * FROM staffRole';
   connection.query(queryString, function(err, res){
     if (err) throw err;
-    consTable(res);
+    console.table(res);
     start();
   })
 };
@@ -190,7 +190,7 @@ let upadateEmployeeRole = () => {
         [answer.updateRole, answer.eeUpdate],
         function (err, res) {
           if (err) throw err;
-          consTable(res);
+          console.table(res);
           start();
         }
       );
