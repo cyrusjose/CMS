@@ -7,9 +7,9 @@ const questions = [
   "Add a department",
   "Add an employee",
   "Add a role",
-  "View and employee",
-  "View a department",
-  "View a role",
+  "View employees",
+  "View departments",
+  "View roles",
   "Update employee role",
 ];
 
