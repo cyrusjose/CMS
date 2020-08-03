@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 var connection = require("./config/connection");
+var consolTable = require("console.table");
 
 // There are a total of 7 items in the array currently. Since index starts at 0 the frist item is 0 and the last item is 6.
 const questions = [
@@ -10,7 +11,6 @@ const questions = [
   "View a department",
   "View a role",
   "Update employee role",
-  'Exit'
 ];
 
 function start() {
@@ -23,7 +23,6 @@ function start() {
     })
     .then(function (answer) {
       switch (answer.prelimQuestion) {
-        // Case does not evaluate anything.
         case questions[0]:
           addDepartment();
           break;
@@ -49,7 +48,7 @@ function start() {
         //     return;
         //   break;
         default:
-          "Please choose and option";
+          connection.end();
           break;
       }
     });
@@ -81,71 +80,96 @@ let addDepartment = () => {
 };
 
 let addRole = () => {
-  let addRoleQuery = "INSERT INTO staffRole SET ?";
   inquirer
     .prompt([
       {
-        name: "title",
         type: "input",
-        message: "Please enter the title of the role",
+        name: "role",
+        message: "What's the name of the role?",
       },
       {
+        type: "input",
         name: "salary",
+        message: "What is the salary for this role?",
+      },
+      {
         type: "input",
-        message: "Please enter the salary of the employee",
+        name: "deptID",
+        message: "What is the department id number?",
       },
     ])
-    .then((answer) => {
+    .then(function (result) {
       connection.query(
-        addRoleQuery,
-        {
-          title: answer.title,
-          salary: answer.salary,
-        },
-        (err) => {
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+        [answer.role, answer.salary, answer.deptID],
+        function (err, res) {
           if (err) throw err;
-          console.log("You have successfully added a role!");
           start();
         }
       );
     });
-};
+}
 
-let addEmployee = () => {
-  let addEmpQuery = "INSERT INTO employee SET ?";
+let addEmployee = ()=> {
   inquirer
     .prompt([
       {
-        name: "firstName",
         type: "input",
-        message: "Please enter the first name of the employee.",
+        name: "firstname",
+        message: "What is the employee's first name?",
       },
       {
-        name: "lastName",
         type: "input",
-        message: "Please enter the last name of the employee.",
+        name: "lastname",
+        message: "What is the employee's last name?",
+      },
+      {
+        type: "input",
+        name: "roleId",
+        message: "What is the employee's role ID?",
       },
     ])
-    .then((answer) => {
+    .then(function (res) {
       connection.query(
-        addEmpQuery,
-        {
-          first_name: answer.firstName,
-          last_name: answer.lastName
-        },
-        (err) => {
+        "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [answer.firstname, answer.lastname, answer.roleId],
+        function (err, res) {
           if (err) throw err;
-          console.log("You have successfully added an employee!");
+          console.log("Successfully added employee!");
           start();
         }
       );
     });
-};
+}
 
 let viewDepartment = () => {};
 let viewEmployee = () => {};
 let viewRole = () => {};
 
-let upadateEmployeeRole = () => {};
+let upadateEmployeeRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "updateEmp",
+        message: "Which employee would you like to update?",
+      },
+      {
+        type: "input",
+        name: "updateRole",
+        message: "What do you want to update to?",
+      },
+    ])
+    .then(function (answer) {
+      connection.query(
+        "UPDATE employee SET role_id=? WHERE first_name= ?",
+        [answer.updateRole, answer.eeUpdate],
+        function (err, res) {
+          if (err) throw err;
+          start();
+        }
+      );
+    });
+};
 
 start();
