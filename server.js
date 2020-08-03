@@ -73,7 +73,6 @@ let addDepartment = () => {
         (err, res) => {
           if (err) throw err;
           console.log("You've successfully added a department");
-          console.table(res);
           start();
         }
       );
@@ -105,7 +104,7 @@ let addRole = () => {
         [answer.role, answer.salary, answer.deptID],
         function (err, res) {
           if (err) throw err;
-          console.table(res);
+          console.log('Successfully Added Role!')
           start();
         }
       );
@@ -138,7 +137,6 @@ let addEmployee = ()=> {
         function (err, res) {
           if (err) throw err;
           console.log("Successfully added employee!");
-          console.table(res);
           start();
         }
       );
