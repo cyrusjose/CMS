@@ -2,7 +2,7 @@ var inquirer = require("inquirer");
 var connection = require("./config/connection");
 var consTable = require("console.table");
 
-// There are a total of 7 items in the array currently. Since index starts at 0 the frist item is 0 and the last item is 6.
+
 const questions = [
   "Add a department",
   "Add an employee",
@@ -100,18 +100,18 @@ let addRole = () => {
     ])
     .then(function (answer) {
       connection.query(
-        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+        "INSERT INTO staffRole (title, salary, department_id) VALUES (?, ?, ?)",
         [answer.role, answer.salary, answer.deptID],
         function (err, res) {
           if (err) throw err;
-          console.log('Successfully Added Role!')
+          console.log("Successfully Added Role!");
           start();
         }
       );
     });
-}
+};
 
-let addEmployee = ()=> {
+let addEmployee = () => {
   inquirer
     .prompt([
       {
@@ -141,31 +141,31 @@ let addEmployee = ()=> {
         }
       );
     });
-}
+};
 
 let viewDepartment = () => {
-  let queryString = 'SELECT * FROM department';
-  connection.query(queryString, function(err, res){
-    if(err) throw err;
+  let queryString = "SELECT * FROM department";
+  connection.query(queryString, function (err, res) {
+    if (err) throw err;
     console.table(res);
     start();
-  })
+  });
 };
 let viewEmployee = () => {
-  let queryString = 'SELECT * FROM employee';
-  connection.query(queryString, function(err, res){
+  let queryString = "SELECT * FROM employee";
+  connection.query(queryString, function (err, res) {
     if (err) throw err;
     console.table(res);
     start();
-  })
+  });
 };
 let viewRole = () => {
-  let queryString = 'SELECT * FROM staffRole';
-  connection.query(queryString, function(err, res){
+  let queryString = "SELECT * FROM staffRole";
+  connection.query(queryString, function (err, res) {
     if (err) throw err;
     console.table(res);
     start();
-  })
+  });
 };
 
 let upadateEmployeeRole = () => {
@@ -179,16 +179,16 @@ let upadateEmployeeRole = () => {
       {
         type: "input",
         name: "updateRole",
-        message: "What do you want to update to?",
+        message: "What is their new role ID?",
       },
     ])
     .then(function (answer) {
       connection.query(
-        "UPDATE employee SET role_id=? WHERE first_name= ?",
-        [answer.updateRole, answer.eeUpdate],
+        "UPDATE employee SET role_id= ? WHERE first_name= ?",
+        [answer.updateRole, answer.updateEmp],
         function (err, res) {
           if (err) throw err;
-          console.table(res);
+          console.log("Successfully updated role!");
           start();
         }
       );
