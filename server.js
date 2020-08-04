@@ -61,14 +61,14 @@ let addDepartment = () => {
       {
         name: "addDepartment",
         type: "input",
-        message: "What's the name of the department",
-      },
+        message: "What's the name of the department?",
+      }
     ])
     .then((answer) => {
       connection.query(
         addDeptQuery,
         {
-          name: answer.addDepartment,
+          name: answer.addDepartment
         },
         (err, res) => {
           if (err) throw err;
