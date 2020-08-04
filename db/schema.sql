@@ -1,4 +1,3 @@
-
 -- Drops the cms_db if it already exists --
 DROP DATABASE IF EXISTS cms_db;
 
@@ -20,8 +19,11 @@ CREATE TABLE staffRole (
     title VARCHAR(40) NOT NULL,
     salary DECIMAL(6,0) NOT NULL,
     department_id INT NOT NULL,
-    -- Take a colum of a table and cache it so that we can reference it frequently.
-    FOREIGN KEY (department_id) REFERENCES department (id), 
+    -- Take a colum of a table and cache it so that we can refernce it frequently.
+    --  ON DELETE CASCADE will delete the reference to the other table once the code is done running. 
+    INDEX dep_id (department_id), 
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES 
+    department (id) ON DELETE CASCADE, 
     PRIMARY KEY(id)
 );
 
@@ -31,9 +33,9 @@ CREATE TABLE employee (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES 
-    staffRole (id),
-    FOREIGN KEY (manager_id) REFERENCES  employee (id),
+    INDEX ro_id (role_id), 
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES 
+    staffRole (id) ON DELETE CASCADE,
+    manager_id INT NOT NULL,
     PRIMARY KEY(id)
 );
-
