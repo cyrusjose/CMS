@@ -8,10 +8,16 @@
   * [License](#License)
  <!--te-->
  ## Installation
- Installation requirement(s) [Add more as necessary]: 
- * node, console.table, express, and inquirer.
+ Installation requirements: 
+ * node
+ * console.table
+ * express
+ * inquirer.
  ## Usage
  First, make sure that all of dependencies are installed. Then run npm start on teh command line to start the app.
+ ### Image
+ <img src = "./assets/images/Screen Shot 2020-08-03 at 5.58.07 PM.png">
+
  ## License
  The chosen license for this application is MIT. Please follow the link below for more imformation about the license.
  * https://opensource.org/licenses/MIT
