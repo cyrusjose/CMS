@@ -20,8 +20,7 @@ CREATE TABLE staffRole (
     title VARCHAR(40) NOT NULL,
     salary DECIMAL(6,0) NOT NULL,
     department_id INT NOT NULL,
-    -- Take a colum of a table and cache it so that we can refernce it frequently.
-    --  ON DELETE CASCADE will delete the reference to the other table once the code is done running. 
+    -- Take a colum of a table and cache it so that we can reference it frequently.
     FOREIGN KEY (department_id) REFERENCES department (id), 
     PRIMARY KEY(id)
 );
