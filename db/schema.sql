@@ -21,9 +21,9 @@ CREATE TABLE staffRole (
     department_id INT NOT NULL,
     -- Take a colum of a table and cache it so that we can refernce it frequently.
     --  ON DELETE CASCADE will delete the reference to the other table once the code is done running. 
-    INDEX dep_id (department_id), 
-    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES 
-    department (id) ON DELETE CASCADE, 
+    -- INDEX dep_id (department_id), 
+    -- CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES 
+    -- department (id) ON DELETE CASCADE, 
     PRIMARY KEY(id)
 );
 
@@ -33,9 +33,9 @@ CREATE TABLE employee (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
-    INDEX ro_id (role_id), 
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES 
-    staffRole (id) ON DELETE CASCADE,
-    manager_id INT NOT NULL,
+    -- INDEX ro_id (role_id), 
+    -- CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES 
+    -- staffRole (id) ON DELETE CASCADE,
+    manager_id INT,
     PRIMARY KEY(id)
 );

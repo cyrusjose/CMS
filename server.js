@@ -11,6 +11,7 @@ const questions = [
   "View departments",
   "View roles",
   "Update employee role",
+  "Exit"
 ];
 
 function start() {
@@ -44,9 +45,9 @@ function start() {
         case questions[6]:
           upadateEmployeeRole();
           break;
-        // case questions[7]:
-        //     return;
-        //   break;
+        case questions[7]:
+            connection.end();
+          break;
         default:
           connection.end();
           break;
@@ -129,11 +130,16 @@ let addEmployee = () => {
         name: "roleId",
         message: "What is the employee's role ID?",
       },
+      {
+        type: "input",
+        message: "What is the manager id number? (Leave empty if not applicable)",
+        name: "managerID"
+      }
     ])
     .then(function (answer) {
       connection.query(
         "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
-        [answer.firstname, answer.lastname, answer.roleId],
+        [answer.firstname, answer.lastname, answer.roleId, answer.manager],
         function (err, res) {
           if (err) throw err;
           console.log("Successfully added employee!");
