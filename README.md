@@ -18,6 +18,8 @@
  ### Image
  <img src = "./assets/images/Screen Shot 2020-08-03 at 5.58.07 PM.png">
 
+ ### Video Link
+ * https://drive.google.com/file/d/12NWhryapMU6Zb_ifmbTYZXBMPk0ymrPN/view
  ## License
  The chosen license for this application is MIT. Please follow the link below for more imformation about the license.
  * https://opensource.org/licenses/MIT
