@@ -4,11 +4,11 @@ var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'Pse2udograph2#$',
+    password: '',
     database: 'cms_db'
 });
-connection.connect(function(err){
-    if(err) {
+connection.connect(function(err) {
+    if (err) {
         console.error('error connecting: ' + err.stack);
         return;
     }
